@@ -1,5 +1,5 @@
-# Use the standard Python image as a parent image
-FROM python:3.10
+# Use a Conda-based Python image
+FROM condaforge/miniforge3:latest
 
 # Set the working directory in the container to /app
 WORKDIR /app
