@@ -14,9 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Copy the requirements file into the working directory
 COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt, plus gunicorn
-RUN pip install --no-cache-dir gunicorn
-RUN pip install --no-cache-dir -r requirements.txt
+# Install all needed packages in a single command
+RUN pip install --no-cache-dir gunicorn -r requirements.txt
 
 # Copy the entire project to the working directory
 COPY . .
