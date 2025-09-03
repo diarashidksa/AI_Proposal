@@ -1,21 +1,13 @@
-# Use an official Python runtime as a parent image
-FROM python:3.10-slim
+# Use the standard Python image as a parent image
+FROM python:3.10
 
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Install system dependencies needed for pypdf and python-docx
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libffi-dev \
-    libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copy the requirements file into the working directory
 COPY requirements.txt .
 
-# Install all Python packages from requirements.txt in one command
-# This is the most reliable way to ensure all dependencies are met
+# Install all Python packages from requirements.txt, including gunicorn
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project to the working directory
