@@ -3,7 +3,7 @@ import json
 import uuid
 import pickle
 from langdetect import detect
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from docx import Document
 from sentence_transformers import SentenceTransformer
 import faiss
