@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Copy the requirements file into the working directory
 COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt
-# Gunicorn is a production-ready web server that Render recommends for Flask
+# Install any needed packages specified in requirements.txt, plus gunicorn
+RUN pip install --no-cache-dir gunicorn
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project to the working directory
