@@ -1,0 +1,13 @@
+Flask
+openai
+faiss-cpu
+python-dotenv
+tiktoken
+pypdf
+python-docx
+langchain
+langchain-community
+langchain-openai
+numpy
+langdetect
+

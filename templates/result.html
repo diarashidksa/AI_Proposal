@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal Generated</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a1a1a; /* darkbg from index.html */
+            color: #e0e0e0; /* graytext from index.html */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #262626; /* Slightly lighter dark color for container */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+        }
+        h1, h2, h3 {
+            color: #FF8C00; /* darkorange from index.html */
+            border-bottom: 2px solid #8B0000; /* darkred from index.html */
+            padding-bottom: 10px;
+            margin-top: 25px;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.2em; }
+
+        /* Download Button Styling */
+        .btn {
+            background: linear-gradient(90deg, #8B0000, #FF8C00);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-decoration: none; /* In case it's an anchor tag */
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            background-color: #1a1a1a;
+        }
+
+        /* Lists */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 5px;
+        }
+        li {
+            background-color: #333;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #FF8C00;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Proposal Successfully Generated! 🎉</h1>
+
+        <h2>Download Your Proposal</h2>
+        <p>Your document has been created. Click the button below to download it.</p>
+
+        <!-- The button that triggers the download via JavaScript -->
+        <button class="btn" onclick="downloadFile('{{ download_url }}', '{{ filename }}')">
+            Download Proposal
+        </button>
+
+        <h2>Resources & References Used</h2>
+        <div id="sources-report">
+            {% for section, sources in sources_data.items() %}
+                <h3>{{ section }}</h3>
+                <ul>
+                    {% for source in sources %}
+                        <li>{{ source }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+
+        <h2>Financial Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>UOM</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in finance_items %}
+                <tr>
+                    <td>{{ item.Item }}</td>
+                    <td>{{ item.UOM }}</td>
+                    <td>{{ item.Qty }}</td>
+                    <td>{{ item.UnitPrice }}</td>
+                    <td>{{ item.Total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

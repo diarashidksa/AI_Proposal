@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasheed AI Proposal Generator</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='brand.png') }}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind config for colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#1a1a1a',
+                        darkred: '#8B0000',
+                        darkorange: '#FF8C00',
+                        graytext: '#e0e0e0'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .btn {
+            background: linear-gradient(90deg, #8B0000, #FF8C00);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .loading-icon {
+            animation: spin 2s linear infinite;
+            height: 50px;
+            width: 50px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 border-b border-gray-700">
+        <div class="flex items-center space-x-2">
+            <img src="{{ url_for('static', filename='brand.png') }}" alt="Rasheed AI" class="h-12 w-12">
+            <h1 class="text-2xl font-bold text-gray-200">Rasheed AI Proposal Generator</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-6">
+        {% if not proposal_generated %}
+        <!-- Form to generate proposal -->
+        <form action="/generate" method="POST" enctype="multipart/form-data" class="w-full max-w-lg space-y-4 bg-gray-900 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-bold mb-2">Upload Files & Brief</h2>
+            <input type="file" name="files" multiple class="w-full text-gray-300">
+            <textarea name="brief" placeholder="Enter client brief..." class="w-full p-2 rounded bg-gray-800 text-gray-200" rows="5"></textarea>
+            <button type="submit" class="btn w-full">Generate Proposal</button>
+        </form>
+        {% else %}
+        <!-- Loading / animation while generating -->
+        <div class="flex flex-col items-center justify-center space-y-4">
+            <img src="{{ url_for('static', filename='brain.png') }}" alt="Generating..." class="loading-icon">
+            <p class="text-gray-300 text-lg">Generating your proposal...</p>
+        </div>
+        {% endif %}
+
+        {% if proposal_generated %}
+        <!-- Proposal Download & Back Button -->
+        <div class="flex flex-col items-center space-y-4 mt-6">
+            <a href="{{ url_for('static', filename=proposal_filename) }}" download class="btn">Download Proposal</a>
+            <a href="/" class="btn bg-gray-700">Back</a>
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer border-t border-gray-700">
+        Powered by <a href="https://www.rasheed.ai" class="text-darkred font-bold hover:text-darkorange">www.rasheed.ai</a>
+    </footer>
+
+</body>
+</html>
