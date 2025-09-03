@@ -10,4 +10,5 @@ langchain-community
 langchain-openai
 numpy
 langdetect
+gunicorn
 
