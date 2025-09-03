@@ -1,5 +1,5 @@
-# Use a Conda-based Python image
-FROM condaforge/miniforge3:latest
+# Use a pre-built image from Hugging Face for transformers and PyTorch
+FROM huggingface/transformers-pytorch-gpu:latest
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -8,6 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install all Python packages from requirements.txt, including gunicorn
+# This will be much faster now as many dependencies are already present
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project to the working directory
