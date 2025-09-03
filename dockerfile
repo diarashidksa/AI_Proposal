@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Copy the requirements file into the working directory
 COPY requirements.txt .
 
-# Install all needed packages in a single command
-RUN pip install --no-cache-dir gunicorn -r requirements.txt
+# Install all needed packages in a single command, including both pypdf and the old name
+RUN pip install --no-cache-dir gunicorn -r requirements.txt pypdf2
 
 # Copy the entire project to the working directory
 COPY . .
