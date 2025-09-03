@@ -4,10 +4,6 @@ FROM python:3.10
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Clean up any old Python caches and temporary files
-RUN find / -type d -name "__pycache__" -exec rm -r {} + || true
-RUN find / -type f -name "*.pyc" -exec rm -f {} + || true
-
 # Copy the requirements file into the working directory
 COPY requirements.txt .
 
