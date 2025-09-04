@@ -1,5 +1,5 @@
-# Use a pre-built image from Hugging Face for transformers and PyTorch
-FROM huggingface/transformers-pytorch-gpu:latest
+# Use the official Sentence-Transformers CPU-only base image
+FROM sentence-transformers/all-mpnet-base-v2:cpu
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -8,7 +8,6 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install all Python packages from requirements.txt, including gunicorn
-# This will be much faster now as many dependencies are already present
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project to the working directory
@@ -21,3 +20,4 @@ EXPOSE 8000
 # 'app' is the name of your Python file (app.py)
 # 'app' is the name of the Flask application instance inside app.py
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+
