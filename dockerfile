@@ -1,5 +1,5 @@
-# Use a standard Python image
-FROM python:3.10
+# Use the official Miniconda3 base image
+FROM continuumio/miniconda3:latest
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -20,5 +20,6 @@ EXPOSE 8000
 # 'app' is the name of your Python file (app.py)
 # 'app' is the name of the Flask application instance inside app.py
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+
 
 
